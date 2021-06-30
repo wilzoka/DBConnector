@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "name": "dbconnector",
+      "script": "./server.js",
+      "watch": true,
+      "ignore_watch": [
+        "node_modules",
+        "tmp"
+      ],
+      "log_date_format": "DD/MM/YYYY HH:mm Z",
+      "env": {
+        "NODE_ENV": "production",
+        "NODE_PORT": 8085
+      }
+    }
+  ]
+}
