@@ -41,9 +41,9 @@ async function processLineByLine(req) {
         db.connect()
         let i = 0, inserts = [];
         const keys = req.body.keys;
-        if (req.body.presql)
-            await db.query(req.body.presql);
         for await (const data of rl) {
+            if (i == 0 && req.body.presql)
+                await db.query(req.body.presql);
             if (i == 10000) {
                 await db.query(inserts.join(';'));
                 i = 0; inserts = [];
