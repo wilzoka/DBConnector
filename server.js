@@ -87,7 +87,6 @@ app.post('/postgresql', async (req, res) => {
         const result = await postgreConn.query(req.body.q);
         res.json({ success: true, data: result.rows });
     } catch (err) {
-        console.error(err);
         res.json({ success: false, msg: err.message });
         if (postgreConn) {
             try {
@@ -120,7 +119,6 @@ app.post('/postgresql/etl', async (req, res) => {
             processLineByLine(req);
         });
     } catch (err) {
-        console.error(err);
         res.json({ success: false, msg: err.message });
         if (postgreConn) {
             try {
@@ -139,7 +137,6 @@ app.post('/oracle', async (req, res) => {
         const result = await oracleConn.execute(req.body.q);
         res.json({ success: true, data: result.rows });
     } catch (err) {
-        console.error(err);
         res.json({ success: false, msg: err.message });
         if (oracleConn) {
             try {
@@ -172,8 +169,7 @@ app.post('/oracle/etl', async (req, res) => {
             processLineByLine(req);
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).end();
+        res.json({ success: false, msg: err.message });
         if (oracleConn) {
             try {
                 await oracleConn.close();
