@@ -132,6 +132,7 @@ app.post('/postgresql/etl', async (req, res) => {
 app.post('/oracle', async (req, res) => {
     let oracleConn;
     try {
+        oracledb.fetchAsBuffer = [ oracledb.BLOB ];
         oracleConn = await oracledb.getConnection(JSON.parse(req.body.dbc));
         await setNLS(oracleConn);
         const result = await oracleConn.execute(req.body.q);
